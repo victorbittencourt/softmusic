@@ -25,8 +25,8 @@ public class UsuarioModelo {
         this.senha         = senha;
     }
 
-    public UsuarioModelo(int
-           idFuncionario,
+    public UsuarioModelo(
+           int idFuncionario,
            String login,
            String senha
     ) {
@@ -34,6 +34,19 @@ public class UsuarioModelo {
         this.login         = login;
         this.senha         = senha;
     }
+    
+    // getUsuário
+    public UsuarioModelo(
+            int idFuncionario,
+            String login
+    ) {
+        this.idFuncionario = idFuncionario;
+        this.login         = login;
+    }
+
+    public UsuarioModelo() {}
+
+    
 
     public int getIdFuncionario() {
         return idFuncionario;

@@ -30,7 +30,7 @@ public class UsuarioControle {
         System.out.println("conectado e preparando para consultar");
         Statement stmt = null;
         try {
-            String sql = "SELECT * FROM USUARIO WHERE login = '" + login + "';";
+            String sql = "SELECT * FROM usuario WHERE login = '" + login + "';";
             System.out.println("SQL: " + sql);
             stmt = conexao.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -81,6 +81,90 @@ public class UsuarioControle {
         }
     }
     
+    // Inserir cliente
+    public boolean inserirUsuario(UsuarioModelo usuario) throws NoSuchAlgorithmException {
+        System.out.println("inserirCliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para inserir");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+            
+            String senhaCrypt = criptograrSenha(usuario.getSenha());
+
+            String sql = " INSERT INTO usuario ("
+                       +    " id_funcionario,"
+                       +    " login,"
+                       +    " senha "
+                       + " ) " +
+                         " VALUES ("
+                       +         usuario.getIdFuncionario()
+                       + ", '" + usuario.getLogin() + "' "
+                       + ", '" + senhaCrypt + "');";
+            
+            System.out.println("SQL: " + sql);
+            
+            stmt.executeUpdate(sql);
+            // Incluindo cliente na listaCliente que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+    
+    public UsuarioModelo getUsuario(int Cod) {
+        System.out.println("pesquisa Usuario");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT * FROM usuario WHERE id_funcionario = " + Cod + ";";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               UsuarioModelo usuario = new UsuarioModelo(
+                       rs.getInt("id_funcionario"),
+                       rs.getString("login")
+               );
+               return usuario;
+            }
+            else
+            {
+               return null;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    } 
+    
     public ArrayList<UsuarioModelo> getListaUsuarios() {
         ArrayList<UsuarioModelo> listaUsuarios = new ArrayList<UsuarioModelo>();
       
@@ -127,4 +211,52 @@ public class UsuarioControle {
         return listaUsuarios;
     } // final do metodo
     
+    public boolean atualizarUsuario(UsuarioModelo usuario) throws NoSuchAlgorithmException {
+        System.out.println("atualizarUsuario");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para atualizar");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+
+            String senhaCrypt = criptograrSenha(usuario.getSenha());
+            
+            String sql = "UPDATE usuario SET login = '" + usuario.getLogin() + "' "
+                       + ", senha = '" + senhaCrypt + "' "
+                       + "WHERE id_funcionario = " + usuario.getIdFuncionario()+ ";";
+            
+            System.out.println("SQL: " + sql);
+            stmt.executeUpdate(sql);
+            // Incluindo alunos na listaAlunos que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+    
+    private String criptograrSenha(String senha) throws NoSuchAlgorithmException {
+        // Criptografa a senha
+        String senhaCrypt = senha;
+
+        // Aplica Hash MD5
+        MessageDigest m =MessageDigest.getInstance("MD5");
+        m.update(senha.getBytes(),0,senha.length());
+
+        // Obtem senha criptografada
+        senhaCrypt = new BigInteger(1,m.digest()).toString(16);
+        
+        return senhaCrypt;
+    }
 }

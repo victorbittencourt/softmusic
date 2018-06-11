@@ -5,6 +5,13 @@
  */
 package Visao;
 
+import Controle.UsuarioControle;
+import Modelo.UsuarioModelo;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author silva
@@ -35,7 +42,7 @@ public class Usuario extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
         btnAcao = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,10 +56,21 @@ public class Usuario extends javax.swing.JFrame {
 
         lblSenha.setText("Senha");
 
-        btnAcao.setText("Adicionar");
+        txtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoFocusLost(evt);
+            }
+        });
 
-        btnAlterar.setText("Alterar");
-        btnAlterar.setEnabled(false);
+        btnAcao.setText("Adicionar");
+        btnAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcaoActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.setEnabled(false);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +97,7 @@ public class Usuario extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnAcao)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblUsuario)
@@ -114,7 +132,7 @@ public class Usuario extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcao)
-                    .addComponent(btnAlterar))
+                    .addComponent(btnDeletar))
                 .addGap(60, 60, 60)
                 .addComponent(btnSair)
                 .addContainerGap(96, Short.MAX_VALUE))
@@ -126,6 +144,56 @@ public class Usuario extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
+        if (btnAcao.getText().equals("Adicionar")) {
+            try {
+                UsuarioControle usuario = new UsuarioControle();
+                if (usuario.inserirUsuario(getDadosFrameUsuario())) {
+                    JOptionPane.showMessageDialog(this,
+                            "Incluido com sucesso!",
+                            "Manutenção de Usuário",
+                            1);
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Inclusão não realizada!",
+                            "Manutenção de Usuário",
+                            0
+                    );
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (btnAcao.getText().equals("Alterar")) {
+            UsuarioControle usuario = new UsuarioControle();
+            try {
+                if (usuario.atualizarUsuario(getDadosFrameUsuario())) {
+                    JOptionPane.showMessageDialog(this,"Atualizado com sucesso!", "Manutenção de Usuário",1);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Atualização não realizada!", "Manutenção de Usuário", 0);
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnAcaoActionPerformed
+
+    private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
+        UsuarioModelo usuario = new UsuarioControle().getUsuario(
+                Integer.parseInt(this.txtCodigo.getText())
+        );
+        
+        // Pesquisar se Cod. Existe
+        if (usuario !=null ) {
+            this.txtCodigo.setText(""+usuario.getIdFuncionario());
+            this.txtUsuario.setText(usuario.getLogin());
+            setStatComponents("edicao");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Cod. Aluno não Existe!", "Manutencao de Aluno",1);
+            setStatComponents("inicio");
+        }
+    }//GEN-LAST:event_txtCodigoFocusLost
 
     /**
      * @param args the command line arguments
@@ -162,9 +230,32 @@ public class Usuario extends javax.swing.JFrame {
         });
     }
 
+    private UsuarioModelo getDadosFrameUsuario() {
+        UsuarioModelo usuario = new UsuarioModelo();
+        usuario.setIdFuncionario(Integer.parseInt(this.txtCodigo.getText()));
+        usuario.setLogin(this.txtUsuario.getText());
+        usuario.setSenha(this.txtSenha.getText());
+                
+        return usuario;
+    }
+    
+    private void setStatComponents(String string) {
+        if (string.equals("edicao")) {
+             this.txtCodigo.setEnabled(false);
+             this.btnAcao.setText("Alterar");
+             this.btnDeletar.setEnabled(true);
+        }
+        
+        if (string.equals("inicio")) {
+             this.txtCodigo.setEnabled(true);
+             this.btnAcao.setText("Adicionar");
+             this.btnDeletar.setEnabled(false);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcao;
-    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblSenha;
