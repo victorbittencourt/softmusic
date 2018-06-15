@@ -190,7 +190,7 @@ public class Usuario extends javax.swing.JFrame {
             setStatComponents("edicao");
         }
         else {
-            JOptionPane.showMessageDialog(this,"Cod. Aluno não Existe!", "Manutencao de Aluno",1);
+            JOptionPane.showMessageDialog(this,"Cod. Usuário não Existe!", "Manutencao de Usuário",1);
             setStatComponents("inicio");
         }
     }//GEN-LAST:event_txtCodigoFocusLost

@@ -189,10 +189,12 @@ public class Login extends javax.swing.JFrame {
             Inicio windowHome = new Inicio();
             windowHome.setLocationRelativeTo(null); // Centraliza janela
             windowHome.setVisible(true); // Abre janela
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuário e/ou senha incorreto(s)", "Login", 1);
             txtUsuario.setText("");
             txtSenha.setText("");
+            txtUsuario.requestFocus();
         }
     }
 

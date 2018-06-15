@@ -104,11 +104,11 @@ public class ClienteControle {
             if (rs.getFetchSize() >= 0) {
                 while (rs.next()) {
                     ClienteModelo cliente = new ClienteModelo(
-                            Boolean.FALSE,
                             rs.getInt("id_cliente"),
                             rs.getString("nome"),
                             rs.getString("RG"),
-                            rs.getString("CPF")
+                            rs.getString("CPF"),
+                            Boolean.FALSE
                     );
                     listaClientes.add(cliente);
                 }
@@ -132,4 +132,167 @@ public class ClienteControle {
         
         return listaClientes;
     } // final do metodo
+    
+     public ClienteModelo getCliente(int Cod) {
+        System.out.println("pesquisa Cliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT * FROM cliente WHERE id_cliente = " + Cod + ";";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               ClienteModelo cliente = new ClienteModelo(
+                       rs.getInt("id_cliente"),
+                       rs.getString("nome"),
+                       rs.getString("RG"),
+                       rs.getString("CPF"),
+                       rs.getString("CEP"),
+                       rs.getString("logradouro"),
+                       rs.getInt("numero"),
+                       rs.getString("cidade"),
+                       rs.getString("estado"),
+                       rs.getString("bairro"),
+                       rs.getString("referencia"),
+                       rs.getString("email"),
+                       rs.getString("telefone")
+               );
+               return cliente;
+            }
+            else
+            {
+               return null;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+     
+    // atualiza cliente
+    public boolean atualizarCliente(ClienteModelo cliente) {
+        System.out.println("atualizarCliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para atualizar");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+            
+            String sql = "UPDATE cliente SET "
+                       + "nome = '" + cliente.getNome()+ "', "
+                       + "RG = '" + cliente.getRg() + "', "
+                       + "CPF = '" + cliente.getCpf()+ "', "
+                       + "CEP = '" + cliente.getCpf() + "', "
+                       + "logradouro = '" + cliente.getLogradouro() + "', "
+                       + "numero = '" + cliente.getNumero() + "', "
+                       + "cidade = '" + cliente.getCidade() + "', "
+                       + "estado = '" + cliente.getEstado() + "', "
+                       + "bairro = '" + cliente.getBairro() + "', "
+                       + "referencia = '" + cliente.getReferencia() + "', "
+                       + "email = '" + cliente.getEmail() + "', "
+                       + "telefone = '" + cliente.getTelefone() + "' "
+                       + "WHERE id_cliente = " + cliente.getIdCliente()+ ";";
+            
+            System.out.println("SQL: " + sql);
+            stmt.executeUpdate(sql);
+            // Incluindo alunos na listaAlunos que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+    
+    // deleta cliente
+    public boolean excluirCliente(ClienteModelo cliente) {
+        System.out.println("excluirCliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado. Preparando para excluir");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+
+            String sql = "DELETE FROM cliente " 
+                       + " WHERE id_cliente = " + cliente.getIdCliente()+ ";";
+            
+            System.out.println("SQL: " + sql);
+            stmt.executeUpdate(sql);
+            // Incluindo alunos na listaAlunos que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+    
+    // deleta multiplos cliente
+    public boolean excluirClienteMultiplo(int codigo) {
+        System.out.println("excluirCliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado. Preparando para excluir");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+
+            String sql = "DELETE FROM cliente " 
+                       + " WHERE id_cliente = " + codigo + ";";
+            
+            System.out.println("SQL: " + sql);
+            stmt.executeUpdate(sql);
+            // Incluindo alunos na listaAlunos que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
 }

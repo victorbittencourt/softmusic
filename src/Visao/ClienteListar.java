@@ -8,6 +8,7 @@ package Visao;
 import Controle.ClienteControle;
 import Modelo.ClienteModelo;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +38,7 @@ public class ClienteListar extends javax.swing.JFrame {
         pnTblCliente = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes - Listar");
@@ -52,11 +54,11 @@ public class ClienteListar extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Retirar", "Cód", "Nome", "RG", "CPF"
+                "Cód", "Nome", "RG", "CPF", "Retirar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -69,6 +71,13 @@ public class ClienteListar extends javax.swing.JFrame {
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
             }
         });
 
@@ -85,7 +94,9 @@ public class ClienteListar extends javax.swing.JFrame {
                 .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(369, 369, 369)
+                .addGap(311, 311, 311)
+                .addComponent(btnDeletar)
+                .addGap(18, 18, 18)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -97,7 +108,9 @@ public class ClienteListar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnTblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSair)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSair)
+                    .addComponent(btnDeletar))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -107,6 +120,43 @@ public class ClienteListar extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        Object[] options = {"Sim", "Não"};
+        
+        int n = JOptionPane.showOptionDialog(
+                null,
+                "Tem certeza que deseja deletar?",
+                "Confirmar ação",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]
+        );
+        
+        // Confirmou
+        if (n == 0) {
+            for (int i = 0; i < tblCliente.getRowCount(); i++) {
+                Boolean chkDel = Boolean.valueOf(
+                        tblCliente.getValueAt(i, 4).toString()
+                );
+                
+                if (chkDel) {
+                    int clienteId = Integer.parseInt(
+                            tblCliente.getValueAt(i, 0).toString()
+                    );
+                    
+                    ClienteControle clienteC = new ClienteControle();
+                    
+                    clienteC.excluirClienteMultiplo(clienteId);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Dados deletados com sucesso");
+                
+            iniciaTabela();
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +195,7 @@ public class ClienteListar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JScrollPane pnTblCliente;
@@ -164,11 +215,11 @@ public class ClienteListar extends javax.swing.JFrame {
         for (i=0;i<=listaClientes.size()-1;i++){
             model.addRow(
                     new Object[]{
-                        Boolean.FALSE,
                         listaClientes.get(i).getIdCliente(),
                         listaClientes.get(i).getNome(),
                         listaClientes.get(i).getRg(),
-                        listaClientes.get(i).getCpf()
+                        listaClientes.get(i).getCpf(),
+                        Boolean.FALSE
                     }
             );
         }

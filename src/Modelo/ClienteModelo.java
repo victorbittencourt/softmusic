@@ -26,11 +26,11 @@ public class ClienteModelo {
     private int status;
     
     public ClienteModelo(
-            Boolean check,
             int idcliente,
             String nome,
             String rg,
-            String cpf
+            String cpf,
+            Boolean check
     ) {
         this.idCliente = idcliente;
         this.nome      = nome;
@@ -38,6 +38,36 @@ public class ClienteModelo {
         this.cpf       = cpf;
     }
 
+    public ClienteModelo(
+            int idCliente,
+            String nome,
+            String rg,
+            String cpf,
+            String cep,
+            String logradouro,
+            int numero,
+            String cidade,
+            String estado,
+            String bairro,
+            String referencia,
+            String email,
+            String telefone
+    ) {
+        this.idCliente  = idCliente;
+        this.nome       = nome;
+        this.rg         = rg;
+        this.cpf        = cpf;
+        this.cep        = cep;
+        this.logradouro = logradouro;
+        this.numero     = numero;
+        this.cidade     = cidade;
+        this.estado     = estado;
+        this.bairro     = bairro;
+        this.referencia = referencia;
+        this.email      = email;
+        this.telefone   = telefone;
+    }
+    
     public ClienteModelo() {}  
 
     public int getIdCliente() {
