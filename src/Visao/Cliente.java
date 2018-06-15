@@ -315,32 +315,47 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void txtCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodClienteFocusLost
-        ClienteModelo cliente = new ClienteControle().getCliente(
-            Integer.parseInt(this.txtCodCliente.getText())
-        );
-        
-        // Pesquisar se Cod. Existe
-        if (cliente !=null )
-        {
-            this.txtCodCliente.setText(""+cliente.getIdCliente());
-            this.txtNomCliente.setText(cliente.getNome());
-            this.txtRgCliente.setText(cliente.getRg());
-            this.txtCpfCliente.setText(cliente.getCpf());
-            this.txtCepCliente.setText(cliente.getCep());
-            this.txtRefCliente.setText(cliente.getReferencia());
-            this.txtNumCliente.setText(""+cliente.getNumero());
-            this.txtCidCliente.setText(cliente.getCidade());
-            this.txtEstCliente.setText(cliente.getEstado());
-            this.txtBaiCliente.setText(cliente.getBairro());
-            this.txtRefCliente.setText(cliente.getReferencia());
-            this.txtEmail.setText(cliente.getEmail());
-            this.txtTelCliente.setText(cliente.getTelefone());
-            setStatComponents("edicao");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this,"Cod. Cliente não Existe!", "Manutencao de Cliente",1);
-            setStatComponents("inicio");
+        if (!this.txtCodCliente.getText().equals("")) {
+            try {
+                Integer.parseInt(this.txtCodCliente.getText());
+                
+                ClienteModelo cliente = new ClienteControle().getCliente(
+                    Integer.parseInt(this.txtCodCliente.getText())
+                );
+
+                // Pesquisar se Cod. Existe
+                if (cliente !=null )
+                {
+                    this.txtCodCliente.setText(""+cliente.getIdCliente());
+                    this.txtNomCliente.setText(cliente.getNome());
+                    this.txtRgCliente.setText(cliente.getRg());
+                    this.txtCpfCliente.setText(cliente.getCpf());
+                    this.txtCepCliente.setText(cliente.getCep());
+                    this.txtRefCliente.setText(cliente.getReferencia());
+                    this.txtNumCliente.setText(""+cliente.getNumero());
+                    this.txtCidCliente.setText(cliente.getCidade());
+                    this.txtEstCliente.setText(cliente.getEstado());
+                    this.txtBaiCliente.setText(cliente.getBairro());
+                    this.txtRefCliente.setText(cliente.getReferencia());
+                    this.txtEmail.setText(cliente.getEmail());
+                    this.txtTelCliente.setText(cliente.getTelefone());
+                    setStatComponents("edicao");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Cod. Cliente não Existe!", "Manutencao de Cliente",1);
+                    setStatComponents("inicio");
+                }   
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Por favor, Entre com um número válido",
+                        "Manutencao de Cliente",
+                        1
+                );
+                limparCampos();
+                setStatComponents("inicio");
+            }
         }
     }//GEN-LAST:event_txtCodClienteFocusLost
 
