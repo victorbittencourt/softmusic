@@ -44,6 +44,7 @@ public class ClienteControle {
                        +    " numero,"
                        +    " cidade,"
                        +    " estado,"
+                       +    " referencia,"
                        +    " status"
                        + " ) " +
                          " VALUES ("
@@ -59,6 +60,7 @@ public class ClienteControle {
                        + ", '" + cliente.getNumero()+ "'"
                        + ", '" + cliente.getCidade()+ "'"
                        + ", '" + cliente.getEstado()+ "'"
+                       + ", '" + cliente.getReferencia() + "'"
                        + ", '" + cliente.getStatus()+ "');";
             
             System.out.println("SQL: " + sql);
@@ -208,7 +210,8 @@ public class ClienteControle {
                        + "bairro = '" + cliente.getBairro() + "', "
                        + "referencia = '" + cliente.getReferencia() + "', "
                        + "email = '" + cliente.getEmail() + "', "
-                       + "telefone = '" + cliente.getTelefone() + "' "
+                       + "telefone = '" + cliente.getTelefone() + "', "
+                       + "referencia = '" + cliente.getReferencia() + "' "
                        + "WHERE id_cliente = " + cliente.getIdCliente()+ ";";
             
             System.out.println("SQL: " + sql);

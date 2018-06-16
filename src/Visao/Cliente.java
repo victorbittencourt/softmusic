@@ -147,12 +147,8 @@ public class Cliente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblCpfCliente))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-                                        .addComponent(lblNomCliente)))
+                                    .addComponent(lblCpfCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNomCliente, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
@@ -181,7 +177,7 @@ public class Cliente extends javax.swing.JFrame {
                                                 .addComponent(lblEmail)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtEmail)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 51, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblBaiCliente, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -331,7 +327,7 @@ public class Cliente extends javax.swing.JFrame {
                     this.txtRgCliente.setText(cliente.getRg());
                     this.txtCpfCliente.setText(cliente.getCpf());
                     this.txtCepCliente.setText(cliente.getCep());
-                    this.txtRefCliente.setText(cliente.getReferencia());
+                    this.txtEndCliente.setText(cliente.getLogradouro());
                     this.txtNumCliente.setText(""+cliente.getNumero());
                     this.txtCidCliente.setText(cliente.getCidade());
                     this.txtEstCliente.setText(cliente.getEstado());
