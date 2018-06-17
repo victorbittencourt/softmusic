@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelo;
 
-/**
- *
- * @author silva
- */
 public class EmpresaModelo {
+    
     private int codEmpresa;
     private String nomeFantasia;
     private String razaoSocial;
@@ -17,6 +10,45 @@ public class EmpresaModelo {
     private String endereco;
     private String telefone;
     private String email;
+    
+    public EmpresaModelo(
+        int codEmpresa,
+        String nomeFantasia,
+        String razaoSocial,
+        String cnpj,
+        String endereco,
+        String telefone,
+        String email,
+        Boolean check
+    ){
+        this.codEmpresa = codEmpresa;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    
+    public EmpresaModelo(
+        int codEmpresa,
+        String nomeFantasia,
+        String razaoSocial,
+        String cnpj,
+        String endereco,
+        String telefone,
+        String email
+    ){
+        this.codEmpresa = codEmpresa;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    
+    public EmpresaModelo(){}
 
     public int getCodEmpresa() {
         return codEmpresa;

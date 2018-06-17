@@ -5,6 +5,12 @@
  */
 package Visao;
 
+import Controle.ProdutoControle;
+import Modelo.ProdutoModelo;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author silva
@@ -16,6 +22,7 @@ public class ProdutoListar extends javax.swing.JFrame {
      */
     public ProdutoListar() {
         initComponents();
+        iniciaTabela();
     }
 
     /**
@@ -31,6 +38,7 @@ public class ProdutoListar extends javax.swing.JFrame {
         pnTblProduto = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Produtos - Listar");
@@ -40,17 +48,17 @@ public class ProdutoListar extends javax.swing.JFrame {
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Retirar", "Cód", "Nome", "Quantidade", "Valor", "Total de venda"
+                "Cód", "Nome", "Quantidade", "Valor", "Retirar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -60,6 +68,18 @@ public class ProdutoListar extends javax.swing.JFrame {
         pnTblProduto.setViewportView(tblProduto);
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Deletar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,10 +93,12 @@ public class ProdutoListar extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addComponent(pnTblProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(361, 361, 361)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(btnSair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(328, 328, 328))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,13 +108,80 @@ public class ProdutoListar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnTblProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSair)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSair)
+                    .addComponent(jButton1))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Object[] options = {"Sim", "Não"};
+        
+        int n = JOptionPane.showOptionDialog(
+                null,
+                "Tem certeza que deseja deletar?",
+                "Confirmar ação",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]
+        );
+        
+        // Confirmou
+        if (n == 0) {
+            for (int i = 0; i < tblProduto.getRowCount(); i++) {
+                Boolean chkDel = Boolean.valueOf(
+                        tblProduto.getValueAt(i, 4).toString()
+                );
+                
+                if (chkDel) {
+                    int produtoId = Integer.parseInt(
+                            tblProduto.getValueAt(i, 0).toString()
+                    );
+                    
+                    ProdutoControle produtoC = new ProdutoControle();
+                    
+                    produtoC.excluirProdutoMultiplo(produtoId);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Dados deletados com sucesso");
+                
+            iniciaTabela();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private ArrayList<ProdutoModelo> iniciaTabela() {
+        int i;
+        DefaultTableModel model=(DefaultTableModel)tblProduto.getModel();
+        // atribui 0 linhas à coluna
+        model.setNumRows(0);
+        // atribui um tamanho fixo a coluna codigo
+        tblProduto.getColumnModel().getColumn(0).setPreferredWidth(2);
+        ArrayList<ProdutoModelo> listaProdutos = new ArrayList<ProdutoModelo>();
+        listaProdutos = new ProdutoControle().listarProduto();
+        //adiciona alunos as tabelas
+        for (i=0;i<=listaProdutos.size()-1;i++){
+            model.addRow(
+                    new Object[]{
+                        listaProdutos.get(i).getIdProduto(),
+                        listaProdutos.get(i).getNome(),
+                        listaProdutos.get(i).getQuantidadeEstoq(),
+                        listaProdutos.get(i).getPrecoVenda(),
+                        Boolean.FALSE
+                    }
+            );
+        }
+        return listaProdutos;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -131,6 +220,7 @@ public class ProdutoListar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JScrollPane pnTblProduto;
     private javax.swing.JTable tblProduto;

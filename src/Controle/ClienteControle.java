@@ -298,4 +298,42 @@ public class ClienteControle {
             }
         }
     }
+    
+     // Obter quantidade de clientes
+    public int obterQuantidadeCliente() {
+        System.out.println("obterQuantidadeCliente");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT COUNT(id_cliente) AS total_cliente FROM cliente;";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               return Integer.parseInt(rs.getString("total_cliente"));
+            }
+            else
+            {
+               return 0;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
 }

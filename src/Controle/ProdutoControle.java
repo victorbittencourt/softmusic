@@ -254,4 +254,75 @@ public class ProdutoControle {
             }
         }
     }
+    
+    // deleta multiplos produto
+    public boolean excluirProdutoMultiplo(int codigo) {
+        System.out.println("excluirProdutoMultiplo");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado. Preparando para excluir");
+        Statement stmt = null;
+        try {
+            stmt = conexao.createStatement();
+
+            String sql = "DELETE FROM produto " 
+                       + " WHERE id_produto = " + codigo + ";";
+            
+            System.out.println("SQL: " + sql);
+            stmt.executeUpdate(sql);
+            // Incluindo alunos na listaAlunos que vai ser retornada
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
+    
+    // Obter quantidade de produtos
+    public int obterQuantidadeProduto() {
+        System.out.println("obterQuantidadeProduto");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT COUNT(id_produto) AS total_produto FROM produto;";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               return Integer.parseInt(rs.getString("total_produto"));
+            }
+            else
+            {
+               return 0;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
 }
