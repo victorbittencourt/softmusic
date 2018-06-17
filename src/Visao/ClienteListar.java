@@ -210,7 +210,7 @@ public class ClienteListar extends javax.swing.JFrame {
         // atribui um tamanho fixo a coluna codigo
         tblCliente.getColumnModel().getColumn(0).setPreferredWidth(2);
         ArrayList<ClienteModelo> listaClientes = new ArrayList<ClienteModelo>();
-        listaClientes = new ClienteControle().getListaClientes();
+        listaClientes = new ClienteControle().listarCliente();
         //adiciona alunos as tabelas
         for (i=0;i<=listaClientes.size()-1;i++){
             model.addRow(

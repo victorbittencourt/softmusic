@@ -266,7 +266,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumClienteActionPerformed
 
     private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
-        if (btnAcao.getText().equals("Adicionar")) {
+        if (btnAcao.getText().equals("Salvar")) {
             ClienteControle cliente = new ClienteControle();
             if (cliente.inserirCliente(getDadosFrameCliente())) {
                 JOptionPane.showMessageDialog(this,
@@ -313,7 +313,7 @@ public class Cliente extends javax.swing.JFrame {
             try {
                 Integer.parseInt(this.txtCodCliente.getText());
                 
-                ClienteModelo cliente = new ClienteControle().getCliente(
+                ClienteModelo cliente = new ClienteControle().obterCliente(
                     Integer.parseInt(this.txtCodCliente.getText())
                 );
 
@@ -399,7 +399,7 @@ public class Cliente extends javax.swing.JFrame {
         
         if (string.equals("inicio")) {
              this.txtCodCliente.setEnabled(true);
-             this.btnAcao.setText("Adicionar");
+             this.btnAcao.setText("Salvar");
         }
     }
     

@@ -5,6 +5,10 @@
  */
 package Visao;
 
+import Controle.ProdutoControle;
+import Modelo.ProdutoModelo;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author silva
@@ -50,8 +54,9 @@ public class Produto extends javax.swing.JFrame {
         txtPrecoCompraProduto = new javax.swing.JTextField();
         lblPrecoVendaProduto = new javax.swing.JLabel();
         txtPrecoVendaProduto = new javax.swing.JTextField();
-        btnSalvar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnAcao = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Produtos - Salvar");
@@ -60,6 +65,12 @@ public class Produto extends javax.swing.JFrame {
         lblTitulo.setText("Cadastro de produto");
 
         lblCodProduto.setText("Código");
+
+        txtCodProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodProdutoFocusLost(evt);
+            }
+        });
 
         lblNomProduto.setText("Nome");
 
@@ -81,9 +92,26 @@ public class Produto extends javax.swing.JFrame {
 
         lblPrecoVendaProduto.setText("Preço de venda");
 
-        btnSalvar.setText("Salvar");
+        btnAcao.setText("Salvar");
+        btnAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcaoActionPerformed(evt);
+            }
+        });
 
-        btnCancelar.setText("Cancelar");
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,31 +142,33 @@ public class Produto extends javax.swing.JFrame {
                                     .addComponent(lblTotEstProduto)
                                     .addComponent(lblMarcaProduto)
                                     .addComponent(txtMarcaProduto)
-                                    .addComponent(txtTotEstProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTotEstProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCatProduto)
+                                    .addComponent(txtCatProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                                     .addComponent(txtPrecoCompraProduto)
                                     .addComponent(lblCodBarProduto)
                                     .addComponent(lblCatProduto)
-                                    .addComponent(lblPrecoCompraProduto)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblPrecoCompraProduto))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblPrecoVendaProduto)
-                                            .addComponent(lblFornProduto))
-                                        .addGap(32, 32, 32))
+                                    .addComponent(lblPrecoVendaProduto)
+                                    .addComponent(lblFornProduto)
                                     .addComponent(txtFornProduto)
                                     .addComponent(txtPrecoVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtCodBarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(lblTitulo)))
+                        .addComponent(lblTitulo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAcao)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeletar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar)
+                        .addGap(149, 149, 149)))
                 .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -180,16 +210,151 @@ public class Produto extends javax.swing.JFrame {
                     .addComponent(txtTotEstProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoCompraProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnCancelar))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(btnAcao)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnLimpar))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
+        if (btnAcao.getText().equals("Salvar")) {
+            ProdutoControle produto = new ProdutoControle();
+            if (produto.inserirProduto(getDadosFrameProduto())) {
+                JOptionPane.showMessageDialog(this,
+                        "Incluido com sucesso!",
+                        "Manutenção de Produto",
+                        1);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Inclusão não realizada!",
+                        "Manutenção de Produto",
+                        0
+                );
+            }
+        } 
+        else {
+            ProdutoControle produto = new ProdutoControle();
+            if (produto.atualizarProduto(getDadosFrameProduto())) {
+                JOptionPane.showMessageDialog(this,"Atualizado com sucesso!", "Manutenção de Produto",1);
+            } else {
+                JOptionPane.showMessageDialog(this, "Atualização não realizada!", "Manutenção de Produto", 0);
+            }
+        };
+    }//GEN-LAST:event_btnAcaoActionPerformed
+
+    private void txtCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodProdutoFocusLost
+        if (!this.txtCodProduto.getText().equals("")) {
+            try {
+                Integer.parseInt(this.txtCodProduto.getText());
+                
+                ProdutoModelo produto = new ProdutoControle().obterProduto(
+                    Integer.parseInt(this.txtCodProduto.getText())
+                );
+
+                // Pesquisar se Cod. Existe
+                if (produto !=null )
+                {
+                    this.txtCodProduto.setText(""+produto.getIdProduto());
+                    this.txtNomProduto.setText(produto.getNome());
+                    this.txtCodBarProduto.setText(produto.getCodigoBarra());
+                    this.txtDescProduto.setText(produto.getDescricao());
+                    this.txtMarcaProduto.setText(produto.getMarca());
+                    this.txtCatProduto.setText(produto.getCategoria());
+                    this.txtFornProduto.setText(""+produto.getIdFornecedor());
+                    this.txtQtdProduto.setText(""+produto.getQuantidadeMin());
+                    this.txtTotEstProduto.setText(""+produto.getQuantidadeEstoq());
+                    this.txtPrecoCompraProduto.setText(""+produto.getPrecoCompra());
+                    this.txtPrecoVendaProduto.setText(""+produto.getPrecoVenda());
+                    setStatComponents("edicao");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Cod. Produto não Existe!", "Manutencao de Produto",1);
+                    setStatComponents("inicio");
+                }   
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Por favor, Entre com um número válido",
+                        "Manutencao de Produto",
+                        1
+                );
+                limparCampos();
+                setStatComponents("inicio");
+            }
+        }
+    }//GEN-LAST:event_txtCodProdutoFocusLost
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        ProdutoControle produto = new ProdutoControle();
+        if (JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?", "Confirmação de exlusão do Produto", 1, 1)==0){
+            if (produto.excluirProduto(this.getDadosFrameProduto())){
+                JOptionPane.showMessageDialog(this,"Excluido com sucesso!", "Manutenção de Produto",1);
+            }else {
+                JOptionPane.showMessageDialog(this, "Exclusão não realizada!", "Manutenção de Produto", 0);
+            }
+            this.limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Exclusão cancelada pelo usuário!", "Manutenção de Produto", 0);
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private ProdutoModelo getDadosFrameProduto() {
+        ProdutoModelo produto = new ProdutoModelo();
+        produto.setIdProduto(Integer.parseInt(this.txtCodProduto.getText()));
+        produto.setNome(this.txtNomProduto.getText());
+        produto.setCodigoBarra(this.txtCodBarProduto.getText());
+        produto.setDescricao(this.txtDescProduto.getText());
+        produto.setMarca(this.txtMarcaProduto.getText());
+        produto.setCategoria(this.txtCatProduto.getText());
+        produto.setIdFornecedor(Integer.parseInt(this.txtFornProduto.getText()));
+        produto.setQuantidadeMin(Integer.parseInt(this.txtQtdProduto.getText()));
+        produto.setQuantidadeEstoq(Integer.parseInt(this.txtTotEstProduto.getText()));
+        produto.setPrecoCompra(Float.parseFloat(this.txtPrecoCompraProduto.getText()));
+        produto.setPrecoVenda(Float.parseFloat(this.txtPrecoVendaProduto.getText()));
+        
+        return produto;
+    }
+    
+    // Limpa campos do formulário
+    private void limparCampos() {
+        this.txtCodProduto.setText("");
+        this.txtNomProduto.setText("");
+        this.txtCodBarProduto.setText("");
+        this.txtDescProduto.setText("");
+        this.txtMarcaProduto.setText("");
+        this.txtCatProduto.setText("");
+        this.txtFornProduto.setText("");
+        this.txtQtdProduto.setText("");
+        this.txtTotEstProduto.setText("");
+        this.txtPrecoCompraProduto.setText("");
+        this.txtPrecoVendaProduto.setText("");
+        this.txtCodProduto.requestFocus();
+        setStatComponents("inicio");
+    }
+    
+    // Muda o status dos componentes
+    private void setStatComponents(String string) {
+        if (string.equals("edicao")) {
+             this.txtCodProduto.setEnabled(false);
+             this.btnAcao.setText("Alterar");
+        }
+        
+        if (string.equals("inicio")) {
+             this.txtCodProduto.setEnabled(true);
+             this.btnAcao.setText("Salvar");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -227,8 +392,9 @@ public class Produto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnAcao;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel lblCatProduto;
     private javax.swing.JLabel lblCodBarProduto;
     private javax.swing.JLabel lblCodProduto;

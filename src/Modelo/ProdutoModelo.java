@@ -11,37 +11,69 @@ package Modelo;
  */
 public class ProdutoModelo {
     private int idProduto;
+    private int idFornecedor;
     private String nome;
     private int quantidadeMin;
     private int quantidadeEstoq;
     private String categoria;
     private String marca;
-    private float preco;
+    private float precoCompra;
+    private float precoVenda;
     private String codigoBarra;
     private String descricao;
 
+    // Construtor para lista
     public ProdutoModelo(
             Boolean FALSE,
             int idProduto,
+            int idFornecedor,
             String nome,
             int quantidadeMin,
             int quantidadeEstoq,
             String categoria,
             String marca,
-            float preco,
-            String codigoBarra,
-            String descricao
+            float precoCompra,
+            float precoVenda
     ) {
         this.idProduto       = idProduto;
+        this.idFornecedor    = idFornecedor;
         this.nome            = nome;
         this.quantidadeMin   = quantidadeMin;
         this.quantidadeEstoq = quantidadeEstoq;
         this.categoria       = categoria;
         this.marca           = marca;
-        this.preco           = preco;
+        this.precoCompra     = precoCompra;
+        this.precoVenda      = precoVenda;
+    }
+
+    // Construtor para obter Produto
+    public ProdutoModelo(
+            int idProduto,
+            String nome,
+            String codigoBarra,
+            String descricao,
+            String marca,
+            String categoria,
+            int idFornecedor,
+            int quantidadeMin,
+            int quantidadeEstoq,
+            float precoCompra,
+            float precoVenda
+    ) {
+        this.idProduto       = idProduto;
+        this.nome            = nome;
         this.codigoBarra     = codigoBarra;
         this.descricao       = descricao;
+        this.marca           = marca;
+        this.categoria       = categoria;
+        this.idFornecedor    = idFornecedor;
+        this.quantidadeMin   = quantidadeMin;
+        this.quantidadeEstoq = quantidadeEstoq;
+        this.precoCompra     = precoCompra;
+        this.precoVenda      = precoVenda;
     }
+    
+    public ProdutoModelo() {}
 
     public int getIdProduto() {
         return idProduto;
@@ -49,6 +81,14 @@ public class ProdutoModelo {
 
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
+    }
+    
+    public int getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    public void setIdFornecedor(int idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
     public String getNome() {
@@ -91,12 +131,20 @@ public class ProdutoModelo {
         this.marca = marca;
     }
 
-    public float getPreco() {
-        return preco;
+    public float getPrecoCompra() {
+        return precoCompra;
     }
 
-    public void setPreco(float preco) {
-        this.preco = preco;
+    public void setPrecoCompra(float precoCompra) {
+        this.precoCompra = precoCompra;
+    }
+    
+    public float getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(float precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
     public String getCodigoBarra() {

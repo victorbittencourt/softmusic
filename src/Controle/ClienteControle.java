@@ -84,7 +84,7 @@ public class ClienteControle {
     }
     
     // Monta lista de clientes
-    public ArrayList<ClienteModelo> getListaClientes() {
+    public ArrayList<ClienteModelo> listarCliente() {
         ArrayList<ClienteModelo> listaClientes = new ArrayList<ClienteModelo>();
         
         // Consulta SQL
@@ -135,7 +135,8 @@ public class ClienteControle {
         return listaClientes;
     } // final do metodo
     
-     public ClienteModelo getCliente(int Cod) {
+    // Obter cliente
+    public ClienteModelo obterCliente(int Cod) {
         System.out.println("pesquisa Cliente");
         // inicia a conexao com o Banco de dados chamando
         // a classe Conexao
@@ -233,7 +234,7 @@ public class ClienteControle {
         }
     }
     
-    // deleta cliente
+    // Deleta cliente
     public boolean excluirCliente(ClienteModelo cliente) {
         System.out.println("excluirCliente");
         // inicia a conexao com o Banco de dados chamando
@@ -249,7 +250,6 @@ public class ClienteControle {
             
             System.out.println("SQL: " + sql);
             stmt.executeUpdate(sql);
-            // Incluindo alunos na listaAlunos que vai ser retornada
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
