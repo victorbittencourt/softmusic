@@ -5,6 +5,9 @@
  */
 package Visao;
 
+import Controle.ClienteControle;
+import Controle.ProdutoControle;
+
 /**
  *
  * @author silva
@@ -16,6 +19,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        initDashBoard();
     }
 
     /**
@@ -27,6 +31,14 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTitulo = new javax.swing.JLabel();
+        btnAtualizar = new javax.swing.JButton();
+        lblQtdProduto = new javax.swing.JLabel();
+        lblQtdCliente = new javax.swing.JLabel();
+        lblQtdVenda = new javax.swing.JLabel();
+        txtQtdProduto = new javax.swing.JTextField();
+        txtQtdCliente = new javax.swing.JTextField();
+        txtQtdVenda = new javax.swing.JTextField();
         mnuBar = new javax.swing.JMenuBar();
         mnuArquivo = new javax.swing.JMenu();
         mnuItemSair = new javax.swing.JMenuItem();
@@ -42,6 +54,43 @@ public class Inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Softmusic - Início");
+
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitulo.setText("Dashboard");
+
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/refresh.png"))); // NOI18N
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        lblQtdProduto.setText("Produtos Cadastrados");
+
+        lblQtdCliente.setText("Clientes Cadastrados");
+
+        lblQtdVenda.setText("Vendas Realizadas");
+
+        txtQtdProduto.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+        txtQtdProduto.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtQtdProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtQtdProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtQtdProduto.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtQtdProduto.setEnabled(false);
+
+        txtQtdCliente.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+        txtQtdCliente.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtQtdCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtQtdCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtQtdCliente.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtQtdCliente.setEnabled(false);
+
+        txtQtdVenda.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+        txtQtdVenda.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtQtdVenda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtQtdVenda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtQtdVenda.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtQtdVenda.setEnabled(false);
 
         mnuArquivo.setText("Arquivo");
 
@@ -126,11 +175,45 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblQtdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtQtdProduto))
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtQtdCliente)
+                            .addComponent(lblQtdCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                        .addGap(93, 93, 93)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtQtdVenda)
+                            .addComponent(lblQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(172, 172, 172)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQtdProduto)
+                    .addComponent(lblQtdCliente)
+                    .addComponent(lblQtdVenda))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQtdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,6 +265,10 @@ public class Inicio extends javax.swing.JFrame {
         ViewUser.setVisible(true); // Abre janela
     }//GEN-LAST:event_mnuCadUsuarioActionPerformed
 
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        initDashBoard();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -217,8 +304,28 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void initDashBoard() {
+        // Obtem quantidade de produtos cadastrados
+        ProdutoControle produto = new ProdutoControle();
+        int qtdProduto          = produto.obterQuantidadeProduto();
+        
+        // Obtem quantidade de clientes cadastrados
+        ClienteControle cliente = new ClienteControle();
+        int qtdCliente          = cliente.obterQuantidadeCliente();
+        
+        // Obtem quantidade de vendas realizadas
+        
+        this.txtQtdProduto.setText(""+qtdProduto);
+        this.txtQtdCliente.setText(""+qtdCliente);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JLabel lblQtdCliente;
+    private javax.swing.JLabel lblQtdProduto;
+    private javax.swing.JLabel lblQtdVenda;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuCadCliente;
@@ -231,5 +338,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuConVenda;
     private javax.swing.JMenu mnuConsulta;
     private javax.swing.JMenuItem mnuItemSair;
+    private javax.swing.JTextField txtQtdCliente;
+    private javax.swing.JTextField txtQtdProduto;
+    private javax.swing.JTextField txtQtdVenda;
     // End of variables declaration//GEN-END:variables
 }
