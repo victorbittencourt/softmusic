@@ -35,10 +35,14 @@ public class Inicio extends javax.swing.JFrame {
         mnuCadProduto = new javax.swing.JMenuItem();
         mnuCadVenda = new javax.swing.JMenuItem();
         mnuCadUsuario = new javax.swing.JMenuItem();
+        mnuCadEmpresa = new javax.swing.JMenuItem();
+        mnuCadFuncionario = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
         mnuConCliente = new javax.swing.JMenuItem();
         mnuConProduto = new javax.swing.JMenuItem();
         mnuConVenda = new javax.swing.JMenuItem();
+        mnuConEmpresa = new javax.swing.JMenuItem();
+        mnuConFuncionario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Softmusic - Início");
@@ -90,6 +94,22 @@ public class Inicio extends javax.swing.JFrame {
         });
         mnuCadastrar.add(mnuCadUsuario);
 
+        mnuCadEmpresa.setText("Empresa");
+        mnuCadEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadEmpresaActionPerformed(evt);
+            }
+        });
+        mnuCadastrar.add(mnuCadEmpresa);
+
+        mnuCadFuncionario.setText("Funcionario");
+        mnuCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadFuncionarioActionPerformed(evt);
+            }
+        });
+        mnuCadastrar.add(mnuCadFuncionario);
+
         mnuBar.add(mnuCadastrar);
 
         mnuConsulta.setText("Consulta");
@@ -117,6 +137,22 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         mnuConsulta.add(mnuConVenda);
+
+        mnuConEmpresa.setText("Empresa");
+        mnuConEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConEmpresaActionPerformed(evt);
+            }
+        });
+        mnuConsulta.add(mnuConEmpresa);
+
+        mnuConFuncionario.setText("Funcionário");
+        mnuConFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConFuncionarioActionPerformed(evt);
+            }
+        });
+        mnuConsulta.add(mnuConFuncionario);
 
         mnuBar.add(mnuConsulta);
 
@@ -182,6 +218,30 @@ public class Inicio extends javax.swing.JFrame {
         ViewUser.setVisible(true); // Abre janela
     }//GEN-LAST:event_mnuCadUsuarioActionPerformed
 
+    private void mnuCadEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadEmpresaActionPerformed
+        Empresa ViewCompany = new Empresa();
+        ViewCompany.setLocationRelativeTo(null); // Centraliza janela
+        ViewCompany.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuCadEmpresaActionPerformed
+
+    private void mnuConEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConEmpresaActionPerformed
+        EmpresaListar ViewCompany = new EmpresaListar();
+        ViewCompany.setLocationRelativeTo(null); // Centraliza janela
+        ViewCompany.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuConEmpresaActionPerformed
+
+    private void mnuCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadFuncionarioActionPerformed
+        Funcionario ViewEmployee = new Funcionario();
+        ViewEmployee.setLocationRelativeTo(null); // Centraliza janela
+        ViewEmployee.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuCadFuncionarioActionPerformed
+
+    private void mnuConFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConFuncionarioActionPerformed
+        FuncionarioListar ViewEmployee = new FuncionarioListar();
+        ViewEmployee.setLocationRelativeTo(null); // Centraliza janela
+        ViewEmployee.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuConFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,11 +282,15 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuCadCliente;
+    private javax.swing.JMenuItem mnuCadEmpresa;
+    private javax.swing.JMenuItem mnuCadFuncionario;
     private javax.swing.JMenuItem mnuCadProduto;
     private javax.swing.JMenuItem mnuCadUsuario;
     private javax.swing.JMenuItem mnuCadVenda;
     private javax.swing.JMenu mnuCadastrar;
     private javax.swing.JMenuItem mnuConCliente;
+    private javax.swing.JMenuItem mnuConEmpresa;
+    private javax.swing.JMenuItem mnuConFuncionario;
     private javax.swing.JMenuItem mnuConProduto;
     private javax.swing.JMenuItem mnuConVenda;
     private javax.swing.JMenu mnuConsulta;

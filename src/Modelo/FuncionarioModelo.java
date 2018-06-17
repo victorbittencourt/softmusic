@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelo;
 
-/**
- *
- * @author silva
- */
 public class FuncionarioModelo {
+    
     private int idFuncionario;
     private int idEmpresa;
     private String nome;
@@ -25,6 +18,75 @@ public class FuncionarioModelo {
     private String cargo;
     private String chapa;
     private float salario;
+    
+    public FuncionarioModelo(
+            int idFuncionario,
+            int idEmpresa,
+            String nome,
+            String cpf,
+            String cep,
+            String email,
+            String telefone,
+            String logradouro,
+            String bairro,
+            int numero,
+            String cidade,
+            String estado,
+            String cargo,
+            String chapa,
+            float salario
+    ) {
+        this.idFuncionario = idFuncionario;
+        this.idEmpresa     = idEmpresa;
+        this.nome          = nome;
+        this.cpf           = cpf;
+        this.cep           = cep;
+        this.email         = email;
+        this.telefone      = telefone;
+        this.logradouro    = logradouro;
+        this.bairro        = bairro;
+        this.numero        = numero;
+        this.cidade        = cidade;
+        this.estado        = estado;
+        this.cargo         = cargo;
+        this.chapa         = chapa;
+        this.salario       = salario;
+    }
+    
+    public FuncionarioModelo(
+            int idFuncionario,
+            int idEmpresa,
+            String nome,
+            String cpf,
+            String cep,
+            String email,
+            String telefone,
+            String logradouro,
+            String bairro,
+            int numero,
+            String cidade,
+            String estado,
+            String cargo,
+            String chapa,
+            float salario,
+            Boolean check
+    ) {
+        this.idFuncionario = idFuncionario;
+        this.idEmpresa     = idEmpresa;
+        this.nome          = nome;
+        this.cpf           = cpf;
+        this.cep           = cep;
+        this.email         = email;
+        this.telefone      = telefone;
+        this.logradouro    = logradouro;
+        this.bairro        = bairro;
+        this.numero        = numero;
+        this.cidade        = cidade;
+        this.estado        = estado;
+        this.cargo         = cargo;
+        this.chapa         = chapa;
+        this.salario       = salario;
+    }
 
     public FuncionarioModelo(
             Boolean FALSE,
@@ -60,12 +122,14 @@ public class FuncionarioModelo {
         this.chapa         = chapa;
         this.salario       = salario;
     }
+    
+    public FuncionarioModelo(){}
 
     public int getIdFuncionario() {
         return idFuncionario;
     }
 
-    public void setIduncionario(int idFuncionario) {
+    public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 
@@ -180,6 +244,5 @@ public class FuncionarioModelo {
     public void setSalario(float salario) {
         this.salario = salario;
     }
-    
     
 }
