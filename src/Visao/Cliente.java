@@ -7,6 +7,8 @@ package Visao;
 
 import Controle.ClienteControle;
 import Modelo.ClienteModelo;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,7 @@ public class Cliente extends javax.swing.JFrame {
      */
     public Cliente() {
         initComponents();
+        iniciaComboBoxCliente();        
     }
 
     /**
@@ -34,7 +37,7 @@ public class Cliente extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         lblTitulo = new javax.swing.JLabel();
         lblCodCliente = new javax.swing.JLabel();
-        txtCodCliente = new javax.swing.JTextField();
+        cbCliente = new javax.swing.JComboBox<>();
         lblNomCliente = new javax.swing.JLabel();
         txtNomCliente = new javax.swing.JTextField();
         lblRgCliente = new javax.swing.JLabel();
@@ -73,9 +76,9 @@ public class Cliente extends javax.swing.JFrame {
 
         lblCodCliente.setText("Código");
 
-        txtCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+        cbCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCodClienteFocusLost(evt);
+                cbClienteFocusLost(evt);
             }
         });
 
@@ -146,10 +149,10 @@ public class Cliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(txtRgCliente))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRgCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCpfCliente, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblNomCliente, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -210,12 +213,12 @@ public class Cliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(lblTitulo)
-                .addGap(32, 32, 32)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
                     .addComponent(lblNomCliente)
                     .addComponent(txtNomCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -250,7 +253,7 @@ public class Cliente extends javax.swing.JFrame {
                     .addComponent(lblRefCliente)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcao)
                     .addComponent(btnLimpar)
@@ -273,6 +276,8 @@ public class Cliente extends javax.swing.JFrame {
                         "Incluido com sucesso!",
                         "Manutenção de Cliente",
                         1);
+                iniciaComboBoxCliente();
+                cbCliente.setSelectedIndex(cbCliente.getItemCount()-1);
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Inclusão não realizada!",
@@ -282,8 +287,11 @@ public class Cliente extends javax.swing.JFrame {
             }
         } else {
             ClienteControle cliente = new ClienteControle();
+            int clienteSelecionado = this.cbCliente.getSelectedIndex();
             if (cliente.atualizarCliente(getDadosFrameCliente())) {
                 JOptionPane.showMessageDialog(this,"Atualizado com sucesso!", "Manutenção de Cliente",1);
+                iniciaComboBoxCliente();
+                this.cbCliente.setSelectedIndex(clienteSelecionado);
             } else {
                 JOptionPane.showMessageDialog(this, "Atualização não realizada!", "Manutenção de Cliente", 0);
             }
@@ -295,6 +303,7 @@ public class Cliente extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?", "Confirmação de exlusão de Cliente", 1, 1)==0){
             if (cliente.excluirCliente(this.getDadosFrameCliente())){
                 JOptionPane.showMessageDialog(this,"Excluido com sucesso!", "Manutenção de Cliente",1);
+                iniciaComboBoxCliente();
             }else {
                 JOptionPane.showMessageDialog(this, "Exclusão não realizada!", "Manutenção de Cliente", 0);
             }
@@ -308,19 +317,18 @@ public class Cliente extends javax.swing.JFrame {
         this.limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void txtCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodClienteFocusLost
-        if (!this.txtCodCliente.getText().equals("")) {
+    private void cbClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbClienteFocusLost
+        if (obterId2Cb(this.cbCliente) > 0) {
             try {
-                Integer.parseInt(this.txtCodCliente.getText());
+                int idCliente = obterId2Cb(this.cbCliente);
                 
                 ClienteModelo cliente = new ClienteControle().obterCliente(
-                    Integer.parseInt(this.txtCodCliente.getText())
+                    idCliente
                 );
 
                 // Pesquisar se Cod. Existe
                 if (cliente !=null )
                 {
-                    this.txtCodCliente.setText(""+cliente.getIdCliente());
                     this.txtNomCliente.setText(cliente.getNome());
                     this.txtRgCliente.setText(cliente.getRg());
                     this.txtCpfCliente.setText(cliente.getCpf());
@@ -350,12 +358,14 @@ public class Cliente extends javax.swing.JFrame {
                 limparCampos();
                 setStatComponents("inicio");
             }
+        } else {
+            limparCampos();
         }
-    }//GEN-LAST:event_txtCodClienteFocusLost
+    }//GEN-LAST:event_cbClienteFocusLost
 
     private ClienteModelo getDadosFrameCliente() {
         ClienteModelo cliente = new ClienteModelo();
-        cliente.setIdCliente(Integer.parseInt(this.txtCodCliente.getText()));
+        cliente.setIdCliente(obterId2Cb(this.cbCliente));
         cliente.setNome(this.txtNomCliente.getText());
         cliente.setRg(this.txtRgCliente.getText());
         cliente.setCpf(this.txtCpfCliente.getText());
@@ -374,7 +384,7 @@ public class Cliente extends javax.swing.JFrame {
     }
     
     private void limparCampos() {
-        this.txtCodCliente.setText(null);
+        this.cbCliente.setSelectedItem("Novo");
         this.txtNomCliente.setText(null);
         this.txtRgCliente.setText(null);
         this.txtCpfCliente.setText(null);
@@ -387,20 +397,47 @@ public class Cliente extends javax.swing.JFrame {
         this.txtRefCliente.setText(null);
         this.txtEmail.setText(null);
         this.txtTelCliente.setText(null);
-        this.txtCodCliente.requestFocus();
         setStatComponents("inicio");
     }
     
     private void setStatComponents(String string) {
         if (string.equals("edicao")) {
-             this.txtCodCliente.setEnabled(false);
              this.btnAcao.setText("Alterar");
         }
         
         if (string.equals("inicio")) {
-             this.txtCodCliente.setEnabled(true);
              this.btnAcao.setText("Salvar");
         }
+    }
+    
+    private void iniciaComboBoxCliente() {
+        ArrayList<ClienteModelo> listaClientes = new ArrayList<ClienteModelo>();
+        listaClientes = new ClienteControle().listarCliente();
+         
+        this.cbCliente.removeAllItems();
+       
+        this.cbCliente.addItem("Novo");
+
+        for (int i=0;i<=listaClientes.size()-1;i++){
+            this.cbCliente.addItem(
+                    ""+listaClientes.get(i).getIdCliente()
+                    + " - " + listaClientes.get(i).getNome()
+            );
+        }
+    }
+    
+    private int obterId2Cb(JComboBox obj) {
+        int id       = 0;
+        String txtCb = obj.getSelectedItem().toString();
+        
+        if (!txtCb.equals("Novo")) {
+            String[] arrTxtCb = obj.getSelectedItem().toString().split(" - ");
+            id = Integer.parseInt(arrTxtCb[0]);
+        } else {
+            id = 0;
+        }
+        
+        return id;
     }
     
     /**
@@ -443,6 +480,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JComboBox<String> cbCliente;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblBaiCliente;
     private javax.swing.JLabel lblCepCliente;
@@ -461,7 +499,6 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtBaiCliente;
     private javax.swing.JTextField txtCepCliente;
     private javax.swing.JTextField txtCidCliente;
-    private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtCpfCliente;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndCliente;

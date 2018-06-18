@@ -30,9 +30,8 @@ public class ClienteControle {
         Statement stmt = null;
         try {
             stmt = conexao.createStatement();
-
+                        
             String sql = " INSERT INTO cliente ("
-                       +    " id_cliente,"
                        +    " nome,"
                        +    " RG,"
                        +    " CPF,"
@@ -48,8 +47,7 @@ public class ClienteControle {
                        +    " status"
                        + " ) " +
                          " VALUES ("
-                       +         cliente.getIdCliente()
-                       + ", '" + cliente.getNome() + "'"
+                       + "'" + cliente.getNome() + "'"
                        + ", '" + cliente.getRg() + "'"
                        + ", '" + cliente.getCpf()+ "'"
                        + ", '" + cliente.getCep()+ "'"
