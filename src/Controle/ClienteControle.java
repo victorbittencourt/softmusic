@@ -347,7 +347,7 @@ public class ClienteControle {
         }
     }
     
-     // Obter quantidade de clientes
+    // Obter quantidade de clientes
     public int obterQuantidadeCliente() {
         System.out.println("obterQuantidadeCliente");
         // inicia a conexao com o Banco de dados chamando

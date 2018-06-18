@@ -8,6 +8,7 @@ package Visao;
 import Controle.AppControle;
 import Controle.ClienteControle;
 import Controle.ProdutoControle;
+import Controle.VendaControle;
 import java.sql.Connection;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -493,9 +494,12 @@ Connection conexao = AppControle.getInstancia().getConexao();
         int qtdCliente          = cliente.obterQuantidadeCliente();
         
         // Obtem quantidade de vendas realizadas
+        VendaControle venda     = new VendaControle();
+        int qtdVenda            = venda.obterQuantidadeVenda();
         
         this.txtQtdProduto.setText(""+qtdProduto);
         this.txtQtdCliente.setText(""+qtdCliente);
+        this.txtQtdVenda.setText(""+qtdVenda);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

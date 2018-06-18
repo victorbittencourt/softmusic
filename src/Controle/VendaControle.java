@@ -68,4 +68,41 @@ public class VendaControle {
         return listaVendas ;
     } // final do metodo
     
+    // Obter quantidade de vendas
+    public int obterQuantidadeVenda() {
+        System.out.println("obterQuantidadeVenda");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT COUNT(id_venda) AS total_venda FROM venda;";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               return Integer.parseInt(rs.getString("total_venda"));
+            }
+            else
+            {
+               return 0;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
 }
