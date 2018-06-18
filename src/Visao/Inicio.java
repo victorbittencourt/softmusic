@@ -229,6 +229,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         mnuConsulta.add(mnuConFornecedor);
 
+        mnuConFornecedor.setText("Fornecedor");
+        mnuConFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConFornecedorActionPerformed(evt);
+            }
+        });
+        mnuConsulta.add(mnuConFornecedor);
+
         mnuBar.add(mnuConsulta);
 
         mnuRelatorio.setText("Relatórios");
