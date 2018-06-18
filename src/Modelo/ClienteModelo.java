@@ -68,6 +68,28 @@ public class ClienteModelo {
         this.telefone   = telefone;
     }
     
+    // Construtor para obterCliente2Venda
+    public ClienteModelo(
+        String nome,
+        String logradouro,
+        int numero,
+        String cidade,
+        String estado,
+        String bairro,
+        String referencia,
+        String telefone
+    ) {
+        this.nome       = nome;
+        this.logradouro = logradouro;
+        this.numero     = numero;
+        this.cidade     = cidade;
+        this.estado     = estado;
+        this.cidade     = cidade;
+        this.bairro     = bairro;
+        this.referencia = referencia;
+        this.telefone   = telefone;
+    }
+    
     public ClienteModelo() {}  
 
     public int getIdCliente() {

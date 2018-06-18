@@ -8,6 +8,8 @@ package Visao;
 import Controle.ProdutoControle;
 import Modelo.ProdutoModelo;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -45,7 +47,7 @@ public class Produto extends javax.swing.JFrame {
         lblCatProduto = new javax.swing.JLabel();
         txtCatProduto = new javax.swing.JTextField();
         lblFornProduto = new javax.swing.JLabel();
-        txtFornProduto = new javax.swing.JTextField();
+        cbFornecedor = new javax.swing.JComboBox<>();
         lblQtdProduto = new javax.swing.JLabel();
         txtQtdProduto = new javax.swing.JTextField();
         lblTotEstProduto = new javax.swing.JLabel();
@@ -156,8 +158,8 @@ public class Produto extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblPrecoVendaProduto)
                                     .addComponent(lblFornProduto)
-                                    .addComponent(txtFornProduto)
-                                    .addComponent(txtPrecoVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPrecoVendaProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(cbFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(txtCodBarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
@@ -197,7 +199,7 @@ public class Produto extends javax.swing.JFrame {
                     .addComponent(txtDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMarcaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCatProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFornProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQtdProduto)
@@ -210,12 +212,12 @@ public class Produto extends javax.swing.JFrame {
                     .addComponent(txtTotEstProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoCompraProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcao)
                     .addComponent(btnDeletar)
                     .addComponent(btnLimpar))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
@@ -265,7 +267,7 @@ public class Produto extends javax.swing.JFrame {
                     this.txtDescProduto.setText(produto.getDescricao());
                     this.txtMarcaProduto.setText(produto.getMarca());
                     this.txtCatProduto.setText(produto.getCategoria());
-                    this.txtFornProduto.setText(""+produto.getIdFornecedor());
+                    this.cbFornecedor.setSelectedItem(""+produto.getIdFornecedor());
                     this.txtQtdProduto.setText(""+produto.getQuantidadeMin());
                     this.txtTotEstProduto.setText(""+produto.getQuantidadeEstoq());
                     this.txtPrecoCompraProduto.setText(""+produto.getPrecoCompra());
@@ -316,7 +318,7 @@ public class Produto extends javax.swing.JFrame {
         produto.setDescricao(this.txtDescProduto.getText());
         produto.setMarca(this.txtMarcaProduto.getText());
         produto.setCategoria(this.txtCatProduto.getText());
-        produto.setIdFornecedor(Integer.parseInt(this.txtFornProduto.getText()));
+        produto.setIdFornecedor(Integer.parseInt(this.cbFornecedor.getSelectedItem().toString()));
         produto.setQuantidadeMin(Integer.parseInt(this.txtQtdProduto.getText()));
         produto.setQuantidadeEstoq(Integer.parseInt(this.txtTotEstProduto.getText()));
         produto.setPrecoCompra(Float.parseFloat(this.txtPrecoCompraProduto.getText()));
@@ -333,7 +335,6 @@ public class Produto extends javax.swing.JFrame {
         this.txtDescProduto.setText("");
         this.txtMarcaProduto.setText("");
         this.txtCatProduto.setText("");
-        this.txtFornProduto.setText("");
         this.txtQtdProduto.setText("");
         this.txtTotEstProduto.setText("");
         this.txtPrecoCompraProduto.setText("");
@@ -353,6 +354,15 @@ public class Produto extends javax.swing.JFrame {
              this.txtCodProduto.setEnabled(true);
              this.btnAcao.setText("Salvar");
         }
+    }
+    
+    private void iniciaComboBoxFornecedor() {
+        ArrayList<ProdutoModelo> listaFornecedores = new ArrayList<ProdutoModelo>();
+        listaFornecedores = new ProdutoControle().listarProduto();
+        
+        for (int i=0;i<=listaFornecedores.size()-1;i++){
+            this.cbFornecedor.addItem(""+listaFornecedores.get(i).getIdFornecedor());
+        }        
     }
     
     /**
@@ -395,6 +405,7 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JComboBox<String> cbFornecedor;
     private javax.swing.JLabel lblCatProduto;
     private javax.swing.JLabel lblCodBarProduto;
     private javax.swing.JLabel lblCodProduto;
@@ -411,7 +422,6 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodBarProduto;
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtDescProduto;
-    private javax.swing.JTextField txtFornProduto;
     private javax.swing.JTextField txtMarcaProduto;
     private javax.swing.JTextField txtNomProduto;
     private javax.swing.JTextField txtPrecoCompraProduto;

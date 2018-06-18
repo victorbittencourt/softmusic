@@ -187,6 +187,54 @@ public class ClienteControle {
             }
         }
     }
+    
+    // Obter cliente2venda
+    public ClienteModelo obterCliente2Venda(int Cod) {
+        System.out.println("obterCliente2Venda");
+        // inicia a conexao com o Banco de dados chamando
+        // a classe Conexao
+        conexao = AppControle.getInstancia().getConexao();
+        System.out.println("conectado e preparando para consultar");
+        Statement stmt = null;
+        try {
+            String sql = "SELECT * FROM cliente WHERE id_cliente = " + Cod + ";";
+            System.out.println("SQL: " + sql);
+            stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+         
+            // Tratando os dados retornados..
+            if (rs.next()) {
+               ClienteModelo cliente = new ClienteModelo(
+                       rs.getString("nome"),
+                       rs.getString("logradouro"),
+                       rs.getInt("numero"),
+                       rs.getString("cidade"),
+                       rs.getString("estado"),
+                       rs.getString("bairro"),
+                       rs.getString("referencia"),
+                       rs.getString("telefone")
+               );
+               return cliente;
+            }
+            else
+            {
+               return null;
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // este bloco finally sempre executa na instrução try para
+            // fechar a conexão a cada conexão aberta
+            try {
+                stmt.close();
+                conexao.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao desconectar" + e.getMessage());
+            }
+        }
+    }
      
     // atualiza cliente
     public boolean atualizarCliente(ClienteModelo cliente) {

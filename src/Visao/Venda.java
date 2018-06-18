@@ -5,6 +5,11 @@
  */
 package Visao;
 
+import Controle.ClienteControle;
+import Modelo.ClienteModelo;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author silva
@@ -16,6 +21,7 @@ public class Venda extends javax.swing.JFrame {
      */
     public Venda() {
         initComponents();
+        iniciaComboBoxFornecedor();
     }
 
     /**
@@ -31,7 +37,9 @@ public class Venda extends javax.swing.JFrame {
         lblVendedorVenda = new javax.swing.JLabel();
         txtVendedorVenda = new javax.swing.JTextField();
         lblClienteVenda = new javax.swing.JLabel();
-        txtVendedorCliente = new javax.swing.JTextField();
+        cbCliente = new javax.swing.JComboBox<>();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
         lblEndVenda = new javax.swing.JLabel();
         txtEndVenda = new javax.swing.JTextField();
         lblNumVenda = new javax.swing.JLabel();
@@ -59,7 +67,7 @@ public class Venda extends javax.swing.JFrame {
         tblItensVenda = new javax.swing.JTable();
         btnConfirmar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        btnSair = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         lblTotalVenda = new javax.swing.JLabel();
         txtTotalVenda = new javax.swing.JTextField();
 
@@ -72,6 +80,14 @@ public class Venda extends javax.swing.JFrame {
         lblVendedorVenda.setText("Vendedor");
 
         lblClienteVenda.setText("Cliente");
+
+        cbCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbClienteFocusLost(evt);
+            }
+        });
+
+        lblNome.setText("Nome");
 
         lblEndVenda.setText("Endereço");
 
@@ -123,8 +139,13 @@ public class Venda extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         btnSalvar.setText("Salvar");
 
-        btnSair.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
-        btnSair.setText("Sair");
+        btnLimpar.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         lblTotalVenda.setText("Total");
 
@@ -133,84 +154,90 @@ public class Venda extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(79, 79, 79)
-                            .addComponent(btnSalvar)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSair)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTotalVenda)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblVendedorVenda)
-                                .addComponent(lblClienteVenda)
-                                .addComponent(lblEndVenda)
-                                .addComponent(lblCidadeVenda)
-                                .addComponent(lblRefVenda)
-                                .addComponent(lblCodBarVenda)
-                                .addComponent(lblQtdVenda))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pnTblItensVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(chkTodosVenda)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtRefVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtEndVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                    .addComponent(txtCidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                    .addComponent(txtVendedorVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                    .addComponent(txtVendedorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(lblEstadoVenda))
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(txtQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(lblVlrUnitVenda))
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(txtCodBarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(txtVlrUnitVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtEstadoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(2, 2, 2))))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblTelVenda, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblBairroVenda, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblNumVenda, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblSubTotVenda, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtNumVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtBairroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtTelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtSubTotVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(246, 246, 246)
+                        .addGap(273, 273, 273)
                         .addComponent(lblTitulo)
-                        .addGap(202, 202, 202)))
+                        .addGap(202, 202, 202))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(btnSalvar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTotalVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblVendedorVenda)
+                                    .addComponent(lblClienteVenda)
+                                    .addComponent(lblEndVenda)
+                                    .addComponent(lblCidadeVenda)
+                                    .addComponent(lblRefVenda)
+                                    .addComponent(lblCodBarVenda)
+                                    .addComponent(lblQtdVenda))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pnTblItensVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(chkTodosVenda)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtRefVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                            .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(lblNome)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(txtNome))
+                                                        .addComponent(txtEndVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                        .addComponent(txtCidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(txtVendedorVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                    .addComponent(lblEstadoVenda))
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                    .addComponent(txtQtdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                    .addComponent(lblVlrUnitVenda))
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                    .addComponent(txtCodBarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(0, 0, Short.MAX_VALUE)))
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(txtVlrUnitVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(txtEstadoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addGap(2, 2, 2))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblTelVenda, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblBairroVenda, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblNumVenda, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblSubTotVenda, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtNumVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtBairroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtTelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtSubTotVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING))))))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -218,8 +245,10 @@ public class Venda extends javax.swing.JFrame {
                     .addComponent(lblVendedorVenda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVendedorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblClienteVenda))
+                    .addComponent(lblClienteVenda)
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -269,7 +298,7 @@ public class Venda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(btnSair)
+                    .addComponent(btnLimpar)
                     .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotalVenda))
                 .addGap(25, 25, 25))
@@ -278,6 +307,80 @@ public class Venda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbClienteFocusLost
+        String idCliente = this.cbCliente.getSelectedItem().toString();
+        
+        if (!idCliente.equals("Nenhum")) {
+            try {
+                Integer.parseInt(this.cbCliente.getSelectedItem().toString());
+                
+                ClienteModelo cliente = new ClienteControle().obterCliente2Venda(
+                    Integer.parseInt(this.cbCliente.getSelectedItem().toString())
+                );
+
+                // Pesquisar se Cod. Existe
+                if (cliente !=null )
+                {
+                    this.txtNome.setText(cliente.getNome());
+                    this.txtEndVenda.setText(cliente.getLogradouro());
+                    this.txtNumVenda.setText(""+cliente.getNumero());
+                    this.txtCidadeVenda.setText(cliente.getCidade());
+                    this.txtEstadoVenda.setText(cliente.getEstado());
+                    this.txtBairroVenda.setText(cliente.getBairro());
+                    this.txtRefVenda.setText(cliente.getReferencia());
+                    this.txtTelVenda.setText(cliente.getTelefone());
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"Cod. Cliente não Existe!", "Manutencao de Cliente",1);
+                    setStatComponents("inicio");
+                }   
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Por favor, Entre com um número válido",
+                        "Manutencao de Cliente",
+                        1
+                );
+                limparCampos();
+                setStatComponents("inicio");
+            }
+        } else {
+            limparCampos();
+        }
+    }//GEN-LAST:event_cbClienteFocusLost
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void limparCampos() {
+        this.txtVendedorVenda.setText(null);
+        this.cbCliente.setSelectedItem("Nenhum");
+        this.txtNome.setText(null);
+        this.txtEndVenda.setText(null);
+        this.txtNumVenda.setText(null);
+        this.txtCidadeVenda.setText(null);
+        this.txtEstadoVenda.setText(null);
+        this.txtBairroVenda.setText(null);
+        this.txtRefVenda.setText(null);
+        this.txtTelVenda.setText(null);
+        this.txtVendedorVenda.requestFocus();;
+        setStatComponents("inicio");
+    }
+    
+    private void setStatComponents(String string) {
+//        if (string.equals("edicao")) {
+//             this.tx.setEnabled(false);
+//             this.btnAcao.setText("Alterar");
+//        }
+//        
+//        if (string.equals("inicio")) {
+//             this.txtCodCliente.setEnabled(true);
+//             this.btnAcao.setText("Salvar");
+//        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -313,11 +416,23 @@ public class Venda extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void iniciaComboBoxFornecedor() {
+        ArrayList<ClienteModelo> listaClientes = new ArrayList<ClienteModelo>();
+        listaClientes = new ClienteControle().listarCliente();
+        
+        this.cbCliente.addItem("Nenhum");
+        
+        for (int i=0;i<=listaClientes.size()-1;i++){
+            this.cbCliente.addItem(""+listaClientes.get(i).getIdCliente());
+        }        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cbCliente;
     private javax.swing.JCheckBox chkTodosVenda;
     private javax.swing.JLabel lblBairroVenda;
     private javax.swing.JLabel lblCidadeVenda;
@@ -325,6 +440,7 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodBarVenda;
     private javax.swing.JLabel lblEndVenda;
     private javax.swing.JLabel lblEstadoVenda;
+    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumVenda;
     private javax.swing.JLabel lblQtdVenda;
     private javax.swing.JLabel lblRefVenda;
@@ -341,13 +457,13 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodBarVenda;
     private javax.swing.JTextField txtEndVenda;
     private javax.swing.JTextField txtEstadoVenda;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumVenda;
     private javax.swing.JTextField txtQtdVenda;
     private javax.swing.JTextField txtRefVenda;
     private javax.swing.JTextField txtSubTotVenda;
     private javax.swing.JTextField txtTelVenda;
     private javax.swing.JTextField txtTotalVenda;
-    private javax.swing.JTextField txtVendedorCliente;
     private javax.swing.JTextField txtVendedorVenda;
     private javax.swing.JTextField txtVlrUnitVenda;
     // End of variables declaration//GEN-END:variables

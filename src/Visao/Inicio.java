@@ -5,8 +5,13 @@
  */
 package Visao;
 
+import Controle.AppControle;
 import Controle.ClienteControle;
 import Controle.ProdutoControle;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -55,6 +60,9 @@ public class Inicio extends javax.swing.JFrame {
         mnuConVenda = new javax.swing.JMenuItem();
         mnuConEmpresa = new javax.swing.JMenuItem();
         mnuConFuncionario = new javax.swing.JMenuItem();
+        mnuRelatorio = new javax.swing.JMenu();
+        mnuRelatCliente = new javax.swing.JMenuItem();
+        mnuRelatProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Softmusic - Início");
@@ -205,6 +213,26 @@ public class Inicio extends javax.swing.JFrame {
 
         mnuBar.add(mnuConsulta);
 
+        mnuRelatorio.setText("Relatórios");
+
+        mnuRelatCliente.setText("Clientes");
+        mnuRelatCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRelatClienteActionPerformed(evt);
+            }
+        });
+        mnuRelatorio.add(mnuRelatCliente);
+
+        mnuRelatProduto.setText("Produtos");
+        mnuRelatProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRelatProdutoActionPerformed(evt);
+            }
+        });
+        mnuRelatorio.add(mnuRelatProduto);
+
+        mnuBar.add(mnuRelatorio);
+
         setJMenuBar(mnuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,6 +357,40 @@ public class Inicio extends javax.swing.JFrame {
         ViewEmployee.setVisible(true); // Abre janela
     }//GEN-LAST:event_mnuConFuncionarioActionPerformed
 
+    private void mnuRelatClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatClienteActionPerformed
+        Connection conexao = AppControle.getInstancia().getConexao();
+           
+           JasperPrint print = null;
+           
+           try {
+               print = JasperFillManager.fillReport(
+                       "/home/silva/NetBeansProjects/SoftMusic/src/Visao/RelatCliente.jasper",null,conexao
+               );
+           } catch (Exception e) {
+               System.out.println("Erro:"+e);
+           }
+           
+           JasperViewer view = new JasperViewer(print,false);
+           view.setVisible(true);
+    }//GEN-LAST:event_mnuRelatClienteActionPerformed
+
+    private void mnuRelatProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatProdutoActionPerformed
+        Connection conexao = AppControle.getInstancia().getConexao();
+           
+           JasperPrint print = null;
+           
+           try {
+               print = JasperFillManager.fillReport(
+                       "/home/silva/NetBeansProjects/SoftMusic/src/Visao/RelatProduto.jasper",null,conexao
+               );
+           } catch (Exception e) {
+               System.out.println("Erro:"+e);
+           }
+           
+           JasperViewer view = new JasperViewer(print,false);
+           view.setVisible(true);
+    }//GEN-LAST:event_mnuRelatProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,6 +464,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuConVenda;
     private javax.swing.JMenu mnuConsulta;
     private javax.swing.JMenuItem mnuItemSair;
+    private javax.swing.JMenuItem mnuRelatCliente;
+    private javax.swing.JMenuItem mnuRelatProduto;
+    private javax.swing.JMenu mnuRelatorio;
     private javax.swing.JTextField txtQtdCliente;
     private javax.swing.JTextField txtQtdProduto;
     private javax.swing.JTextField txtQtdVenda;
