@@ -49,12 +49,14 @@ public class Inicio extends javax.swing.JFrame {
         mnuCadUsuario = new javax.swing.JMenuItem();
         mnuCadEmpresa = new javax.swing.JMenuItem();
         mnuCadFuncionario = new javax.swing.JMenuItem();
+        mnuCadFornecedor = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
         mnuConCliente = new javax.swing.JMenuItem();
         mnuConProduto = new javax.swing.JMenuItem();
         mnuConVenda = new javax.swing.JMenuItem();
         mnuConEmpresa = new javax.swing.JMenuItem();
         mnuConFuncionario = new javax.swing.JMenuItem();
+        mnuConFornecedor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Softmusic - Início");
@@ -159,6 +161,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         mnuCadastrar.add(mnuCadFuncionario);
 
+        mnuCadFornecedor.setText("Fornecedor");
+        mnuCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadFornecedorActionPerformed(evt);
+            }
+        });
+        mnuCadastrar.add(mnuCadFornecedor);
+
         mnuBar.add(mnuCadastrar);
 
         mnuConsulta.setText("Consulta");
@@ -202,6 +212,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         mnuConsulta.add(mnuConFuncionario);
+
+        mnuConFornecedor.setText("Fornecedor");
+        mnuConFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConFornecedorActionPerformed(evt);
+            }
+        });
+        mnuConsulta.add(mnuConFornecedor);
 
         mnuBar.add(mnuConsulta);
 
@@ -329,6 +347,18 @@ public class Inicio extends javax.swing.JFrame {
         ViewEmployee.setVisible(true); // Abre janela
     }//GEN-LAST:event_mnuConFuncionarioActionPerformed
 
+    private void mnuConFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConFornecedorActionPerformed
+        FornecedorListar ViewFornecedor = new FornecedorListar();
+        ViewFornecedor.setLocationRelativeTo(null); // Centraliza janela
+        ViewFornecedor.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuConFornecedorActionPerformed
+
+    private void mnuCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadFornecedorActionPerformed
+        Fornecedor ViewFornecedor = new Fornecedor();
+        ViewFornecedor.setLocationRelativeTo(null); // Centraliza janela
+        ViewFornecedor.setVisible(true); // Abre janela
+    }//GEN-LAST:event_mnuCadFornecedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,6 +420,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuCadCliente;
     private javax.swing.JMenuItem mnuCadEmpresa;
+    private javax.swing.JMenuItem mnuCadFornecedor;
     private javax.swing.JMenuItem mnuCadFuncionario;
     private javax.swing.JMenuItem mnuCadProduto;
     private javax.swing.JMenuItem mnuCadUsuario;
@@ -397,6 +428,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu mnuCadastrar;
     private javax.swing.JMenuItem mnuConCliente;
     private javax.swing.JMenuItem mnuConEmpresa;
+    private javax.swing.JMenuItem mnuConFornecedor;
     private javax.swing.JMenuItem mnuConFuncionario;
     private javax.swing.JMenuItem mnuConProduto;
     private javax.swing.JMenuItem mnuConVenda;
