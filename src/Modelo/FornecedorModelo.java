@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelo;
 
-/**
- *
- * @author silva
- */
 public class FornecedorModelo {
+    
     private int codFornecedor;
     private String nomeFantasia;
     private String razaoSocial;
@@ -17,6 +10,45 @@ public class FornecedorModelo {
     private String email;
     private String telefone;
     private String cnpj;
+    
+    public FornecedorModelo (
+        int codFornecedor,
+        String nomeFantasia,
+        String razaoSocial,
+        String endereco,
+        String email,
+        String telefone,
+        String cnpj,
+        Boolean check
+    ){
+        this.codFornecedor = codFornecedor;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.endereco = endereco;
+        this.email = email;
+        this.telefone = telefone;
+        this.cnpj = cnpj;
+    }
+    
+    public FornecedorModelo (
+        int codFornecedor,
+        String nomeFantasia,
+        String razaoSocial,
+        String endereco,
+        String email,
+        String telefone,
+        String cnpj
+    ){
+        this.codFornecedor = codFornecedor;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.endereco = endereco;
+        this.email = email;
+        this.telefone = telefone;
+        this.cnpj = cnpj;
+    }
+    
+    public FornecedorModelo (){}
 
     public int getCodFornecedor() {
         return codFornecedor;
@@ -73,6 +105,5 @@ public class FornecedorModelo {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-    
     
 }
