@@ -205,7 +205,6 @@ public class ClienteControle {
             // Tratando os dados retornados..
             if (rs.next()) {
                ClienteModelo cliente = new ClienteModelo(
-                       rs.getString("nome"),
                        rs.getString("logradouro"),
                        rs.getInt("numero"),
                        rs.getString("cidade"),

@@ -70,7 +70,6 @@ public class ClienteModelo {
     
     // Construtor para obterCliente2Venda
     public ClienteModelo(
-        String nome,
         String logradouro,
         int numero,
         String cidade,
@@ -79,7 +78,6 @@ public class ClienteModelo {
         String referencia,
         String telefone
     ) {
-        this.nome       = nome;
         this.logradouro = logradouro;
         this.numero     = numero;
         this.cidade     = cidade;

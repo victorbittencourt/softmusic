@@ -6,7 +6,9 @@
 package Visao;
 
 import Controle.ClienteControle;
+import Controle.FuncionarioControle;
 import Modelo.ClienteModelo;
+import Modelo.FuncionarioModelo;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,7 @@ public class Venda extends javax.swing.JFrame {
      */
     public Venda() {
         initComponents();
+        iniciaComboBoxVendedor();
         iniciaComboBoxFornecedor();
     }
 
@@ -35,11 +38,9 @@ public class Venda extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblVendedorVenda = new javax.swing.JLabel();
-        txtVendedorVenda = new javax.swing.JTextField();
+        cbVendedor = new javax.swing.JComboBox<>();
         lblClienteVenda = new javax.swing.JLabel();
         cbCliente = new javax.swing.JComboBox<>();
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
         lblEndVenda = new javax.swing.JLabel();
         txtEndVenda = new javax.swing.JTextField();
         lblNumVenda = new javax.swing.JLabel();
@@ -86,8 +87,6 @@ public class Venda extends javax.swing.JFrame {
                 cbClienteFocusLost(evt);
             }
         });
-
-        lblNome.setText("Nome");
 
         lblEndVenda.setText("Endereço");
 
@@ -155,10 +154,9 @@ public class Venda extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(273, 273, 273)
-                        .addComponent(lblTitulo)
-                        .addGap(202, 202, 202))
+                        .addComponent(lblTitulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -190,19 +188,11 @@ public class Venda extends javax.swing.JFrame {
                                                 .addComponent(txtRefVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                            .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(lblNome)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(txtNome))
                                                         .addComponent(txtEndVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(layout.createSequentialGroup()
                                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addGroup(layout.createSequentialGroup()
-                                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                        .addComponent(txtCidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtVendedorVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                    .addComponent(txtCidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                     .addComponent(lblEstadoVenda))
                                                                 .addGroup(layout.createSequentialGroup()
@@ -231,24 +221,27 @@ public class Venda extends javax.swing.JFrame {
                                                     .addComponent(txtBairroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtTelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtSubTotVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING))))))))
+                                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbVendedor, 0, 371, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVendedorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVendedorVenda))
+                    .addComponent(lblVendedorVenda)
+                    .addComponent(cbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblClienteVenda)
-                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome))
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -308,20 +301,21 @@ public class Venda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbClienteFocusLost
-        String idCliente = this.cbCliente.getSelectedItem().toString();
+        String txtCbCliente = this.cbCliente.getSelectedItem().toString();
         
-        if (!idCliente.equals("Nenhum")) {
+        if (!txtCbCliente.equals("Nenhum")) {
+            String[] arrTxtCbCliente = this.cbCliente.getSelectedItem()
+                                                     .toString()
+                                                     .split(" - ");
             try {
-                Integer.parseInt(this.cbCliente.getSelectedItem().toString());
                 
                 ClienteModelo cliente = new ClienteControle().obterCliente2Venda(
-                    Integer.parseInt(this.cbCliente.getSelectedItem().toString())
+                    Integer.parseInt(arrTxtCbCliente[0])
                 );
 
                 // Pesquisar se Cod. Existe
                 if (cliente !=null )
                 {
-                    this.txtNome.setText(cliente.getNome());
                     this.txtEndVenda.setText(cliente.getLogradouro());
                     this.txtNumVenda.setText(""+cliente.getNumero());
                     this.txtCidadeVenda.setText(cliente.getCidade());
@@ -355,9 +349,8 @@ public class Venda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void limparCampos() {
-        this.txtVendedorVenda.setText(null);
+        this.cbVendedor.setSelectedItem("Nenhum");
         this.cbCliente.setSelectedItem("Nenhum");
-        this.txtNome.setText(null);
         this.txtEndVenda.setText(null);
         this.txtNumVenda.setText(null);
         this.txtCidadeVenda.setText(null);
@@ -365,7 +358,6 @@ public class Venda extends javax.swing.JFrame {
         this.txtBairroVenda.setText(null);
         this.txtRefVenda.setText(null);
         this.txtTelVenda.setText(null);
-        this.txtVendedorVenda.requestFocus();;
         setStatComponents("inicio");
     }
     
@@ -417,6 +409,20 @@ public class Venda extends javax.swing.JFrame {
         });
     }
     
+    private void iniciaComboBoxVendedor() {
+        ArrayList<FuncionarioModelo> listaFuncionarios = new ArrayList<FuncionarioModelo>();
+        listaFuncionarios = new FuncionarioControle().getListaFuncionarios();
+        
+        this.cbVendedor.addItem("Nenhum");
+        
+        for (int i=0;i<=listaFuncionarios.size()-1;i++){
+            this.cbVendedor.addItem(
+                    ""+listaFuncionarios.get(i).getIdFuncionario()
+                    + " - " + listaFuncionarios.get(i).getNome()
+            );
+        }        
+    }
+    
     private void iniciaComboBoxFornecedor() {
         ArrayList<ClienteModelo> listaClientes = new ArrayList<ClienteModelo>();
         listaClientes = new ClienteControle().listarCliente();
@@ -424,7 +430,10 @@ public class Venda extends javax.swing.JFrame {
         this.cbCliente.addItem("Nenhum");
         
         for (int i=0;i<=listaClientes.size()-1;i++){
-            this.cbCliente.addItem(""+listaClientes.get(i).getIdCliente());
+            this.cbCliente.addItem(
+                    ""+listaClientes.get(i).getIdCliente()
+                    + " - " + listaClientes.get(i).getNome()
+            );
         }        
     }
 
@@ -433,6 +442,7 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbCliente;
+    private javax.swing.JComboBox<String> cbVendedor;
     private javax.swing.JCheckBox chkTodosVenda;
     private javax.swing.JLabel lblBairroVenda;
     private javax.swing.JLabel lblCidadeVenda;
@@ -440,7 +450,6 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodBarVenda;
     private javax.swing.JLabel lblEndVenda;
     private javax.swing.JLabel lblEstadoVenda;
-    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumVenda;
     private javax.swing.JLabel lblQtdVenda;
     private javax.swing.JLabel lblRefVenda;
@@ -457,14 +466,12 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodBarVenda;
     private javax.swing.JTextField txtEndVenda;
     private javax.swing.JTextField txtEstadoVenda;
-    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumVenda;
     private javax.swing.JTextField txtQtdVenda;
     private javax.swing.JTextField txtRefVenda;
     private javax.swing.JTextField txtSubTotVenda;
     private javax.swing.JTextField txtTelVenda;
     private javax.swing.JTextField txtTotalVenda;
-    private javax.swing.JTextField txtVendedorVenda;
     private javax.swing.JTextField txtVlrUnitVenda;
     // End of variables declaration//GEN-END:variables
 }
