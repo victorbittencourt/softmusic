@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9aa15f3c-387d-4b2e-8c3c-8016fa290ce4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -41,7 +44,7 @@
 		<band height="132" splitType="Stretch">
 			<image>
 				<reportElement x="456" y="0" width="99" height="132" uuid="9dfe6424-1671-4401-891f-7d708a491b3b"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["music.jpg"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="6906d6be-cc33-40ac-af68-893a55afdbd6"/>
@@ -50,14 +53,14 @@
 					<textElement>
 						<font isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry Title]]></text>
+					<text><![CDATA[Softmusic]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="d1ac45db-a594-4a65-bf84-d63c9625ab72"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry SubTitle]]></text>
+					<text><![CDATA[Relatório - Clientes]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -78,53 +81,53 @@
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="7" width="79" height="18" forecolor="#000000" uuid="acba0815-f953-4ce3-9998-8d4bbbf88026"/>
+				<reportElement style="Column header" x="0" y="7" width="41" height="18" forecolor="#000000" uuid="acba0815-f953-4ce3-9998-8d4bbbf88026"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[id_cliente]]></text>
+				<text><![CDATA[Cód.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="79" y="7" width="79" height="18" forecolor="#000000" uuid="c735e466-8681-4e96-91d0-fdfe4b329c16"/>
+				<reportElement style="Column header" x="41" y="7" width="104" height="18" forecolor="#000000" uuid="c735e466-8681-4e96-91d0-fdfe4b329c16"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[nome]]></text>
+				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="158" y="7" width="79" height="18" forecolor="#000000" uuid="f2fba15b-c25a-46a2-8cce-61a21fe4395b"/>
+				<reportElement style="Column header" x="145" y="7" width="80" height="18" forecolor="#000000" uuid="f2fba15b-c25a-46a2-8cce-61a21fe4395b"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[CPF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="237" y="7" width="79" height="18" forecolor="#000000" uuid="63a66d73-6bd7-46b9-b429-43bffa44674a"/>
+				<reportElement style="Column header" x="225" y="7" width="91" height="18" forecolor="#000000" uuid="63a66d73-6bd7-46b9-b429-43bffa44674a"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[email]]></text>
+				<text><![CDATA[E-mail]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="316" y="7" width="79" height="18" forecolor="#000000" uuid="f30a200f-7524-4490-80c9-1ca2368acefa"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[logradouro]]></text>
+				<text><![CDATA[Logradouro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="395" y="7" width="79" height="18" forecolor="#000000" uuid="06661908-a8e7-432d-8e4e-ffafe46dabba"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[cidade]]></text>
+				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="474" y="7" width="79" height="18" forecolor="#000000" uuid="b8779656-61d2-44fc-a7ad-7b4925c4692a"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[estado]]></text>
+				<text><![CDATA[Estado]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -133,51 +136,51 @@
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="9c1842e4-c692-4a15-93f0-fa81a0ee3059"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="79" height="18" uuid="5e96261a-9511-4ad7-be8a-a0dabc09f1d6"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="41" height="18" uuid="5e96261a-9511-4ad7-be8a-a0dabc09f1d6"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="79" y="0" width="79" height="18" uuid="6dc22413-0850-436a-9686-65cf0eab8dce"/>
+					<reportElement style="Detail" positionType="Float" x="41" y="0" width="104" height="18" uuid="6dc22413-0850-436a-9686-65cf0eab8dce"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="158" y="0" width="79" height="18" uuid="f5a2a398-8b2d-493d-9fc4-f7309339e1f4"/>
+					<reportElement style="Detail" positionType="Float" x="145" y="0" width="80" height="18" uuid="f5a2a398-8b2d-493d-9fc4-f7309339e1f4"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{CPF}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="237" y="0" width="79" height="18" uuid="f81b93ef-ebb4-4292-be4f-ba72e804f8ce"/>
+					<reportElement style="Detail" positionType="Float" x="225" y="0" width="91" height="18" uuid="f81b93ef-ebb4-4292-be4f-ba72e804f8ce"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" positionType="Float" x="316" y="0" width="79" height="18" uuid="018c801a-83b1-4158-871a-42f8c95e156f"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" positionType="Float" x="395" y="0" width="79" height="18" uuid="b669e429-37e7-41c6-8f8e-4ba870d1c585"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" positionType="Float" x="474" y="0" width="79" height="18" uuid="7e2636e4-eef3-42bb-87a7-bf59be7b20c2"/>
 					<textElement>
-						<font size="14"/>
+						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 				</textField>
